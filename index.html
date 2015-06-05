@@ -1,0 +1,33 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<title>MadLib</title>
+</head>
+<body>
+	<h1>Kev's MadLib Generator</h1>
+
+	<div id="in">
+
+		<input type="text" id="noun" placeholder="noun, noun, noun, noun, noun"><br>
+		<input type="text" id="verb" placeholder="verb, verb, verb, verb, verb"><br>
+		<input type="text" id="adverb" placeholder="adverb, adverb, adverb, adverb, adverb"><br>
+		<input type="text" id="adjective" placeholder="adjective, adjective, adjective, adjective, adjective"><br>
+
+		<p id="choose">Choose your story:</p>
+			Cool
+			<input id="a" type="radio" name="story"><br>
+			Bro
+			<input id="b" type="radio" name="story"><br>
+			Yo
+			<input id="c" type="radio" name="story"><br>
+			<button onclick="createStory()" name="create">create</button>
+	</div>
+
+	<div id="out">
+
+	</div>
+
+	<script src="madlib.js"></script>
+</body>
+</html>
