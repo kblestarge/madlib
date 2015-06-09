@@ -1,3 +1,45 @@
+#bdy{
+	background-color: #FF9900;
+	color: white;
+}
+
+h1{
+	color: white;
+	text-align: center;
+}
+
+h2.title{
+	text-align: center;
+	color: #FFCC00;
+}
+
+input[type="text"]{
+	width: 350px;
+	margin: 2px;
+}
+
+#in{
+	width: 70%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.ostyle{
+	color: #FF9900;
+	border: solid;
+	border-width: 5px;
+	border-color: #FFCC00;
+	border-radius:20px;
+	background-color: #336688;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+	margin-top: 20px;
+	width: 70%;
+	margin: 0 auto;
+	font-size: 25px;
+}
+
 .underline{
 	text-decoration: underline;
 }
