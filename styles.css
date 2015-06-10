@@ -16,6 +16,7 @@ h2.title{
 input[type="text"]{
 	width: 350px;
 	margin: 2px;
+	color: #336688;
 }
 
 #in{
