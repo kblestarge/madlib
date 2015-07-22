@@ -1,19 +1,20 @@
-<html>
+<html ng-app="madlib">
 <head>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 	<title>MadLib</title>
 </head>
-<body id="bdy">
+<body id="bdy" ng-controller="MainController as main">
 	<h1>Kev's MadLib Generator</h1>
 
 	<div id="in">
 
-		<input type="text" id="noun" placeholder="noun, noun, noun, noun, noun"><br>
-		<input type="text" id="verb" placeholder="verb, verb, verb, verb, verb"><br>
-		<input type="text" id="verbing" placeholder="verb-ing, verb-ing, verb-ing, verb-ing, verb-ing"><br>
-		<input type="text" id="adverb" placeholder="adverb, adverb, adverb, adverb, adverb"><br>
-		<input type="text" id="adjective" placeholder="adjective, adjective, adjective, adjective, adjective"><br><br>
+		<input ng-model="main.options.nouns" type="text" id="noun" placeholder="noun, noun, noun, noun, noun"><br>
+		<input ng-model="main.options.verbs" type="text" id="verb" placeholder="verb, verb, verb, verb, verb"><br>
+		<input ng-model="main.options.verbings" type="text" id="verbing" placeholder="verb-ing, verb-ing, verb-ing, verb-ing, verb-ing"><br>
+		<input ng-model="main.options.adverbs" type="text" id="adverb" placeholder="adverb, adverb, adverb, adverb, adverb"><br>
+		<input ng-model="main.options.adjectives" type="text" id="adjective" placeholder="adjective, adjective, adjective, adjective, adjective"><br><br>
 
 		<p id="choose">Choose your story:</p>
 			Bobby's Story
@@ -22,13 +23,13 @@
 			<input id="b" type="radio" name="story"><br>
 			Magical Ninja Story
 			<input id="c" type="radio" name="story"><br><br>
-			<button class="btn btn-warning" onclick="createStory()" name="create">create</button>
+			<button class="btn btn-warning" ng-click="main.yomama()" name="create">create</button>
 	</div><br>
 
 	<div id="out">
-
+		<story></story>
 	</div>
-
+	<!-- <story verbs="story.verbs"></story> -->
 	<script src="madlib.js"></script>
 </body>
 </html>
