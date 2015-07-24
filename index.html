@@ -18,11 +18,12 @@
 
 		<p id="choose">Choose your story:</p>
 			Bobby's Story
-			<input id="a" type="radio" name="story"><br>
+			<input ng-model="main.selectStory" ng-value="main.preStory.bobby" type="radio" name="story"><br>
 			Techdeck Story
-			<input id="b" type="radio" name="story"><br>
+			<input ng-model="main.selectStory" ng-value="main.preStory.techdeck" type="radio" name="story"><br>
 			Magical Ninja Story
-			<input id="c" type="radio" name="story"><br><br>
+			<input ng-model="main.selectStory" ng-value="main.preStory.ninja" type="radio" name="story"><br><br>
+			<p>{{main.selectStory}}</p>
 			<button class="btn btn-warning" ng-click="main.yomama()" name="create">create</button>
 	</div><br>
 
