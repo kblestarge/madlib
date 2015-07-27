@@ -38,31 +38,64 @@
 
   		for(var prop in self.options){
 
+
+
   			self.finalWords[prop] = {
-  				words: [self.options[prop].split(', ')],
-  				numNeeded: self.story[prop]
+  				words: self.options[prop].split('[^,\s][^\,]*[^,\s]*'),
+  				numNeeded: self.selectStory[prop]
   			};
 
-  			randomize(self.finalWords[prop].words, self.finalWords[prop].numNeeded);
+  			// //trim the whitespace
+	  		// for(var i =0; i < self.finalWords[prop].words.length; i++){
+	  		// 	self.finalWords[prop].words[i] = self.finalWords[prop].words[i].trim();
+	  		// }
+
+  			console.log('beforeFill:',self.finalWords);
+  			self.finalWords[prop].words = defaultFill(prop, self.finalWords[prop].words, self.finalWords[prop].numNeeded);
+
+  			//randomize(self.finalWords[prop].words, self.finalWords[prop].numNeeded);
   		}
-  		console.log(self.finalWords);
+  		console.log('afterFill:',self.finalWords);
 
   		//Output final Array
   	}
 
+  	function defaultFill(wordType, wordArray, wordsNeeded){
+  		var randoArray = [];
+  		var rando;
+
+		//make sure there are no duplicates
+		while(wordArray.length < wordsNeeded){
+
+			do{
+				rando = Math.floor(Math.random()*(wordArray.length));
+			}while(randoArray.indexOf(rando) !== -1)
+			randoArray.push(rando);
+
+			wordArray.push(self.defaults[wordType][rando]);
+		}
+
+		return wordArray;
+  	}
+
   	function randomize(wordArray, wordsNeeded){
+  		var randoArray = [];
+  		var rando;
   		console.log('randomize');
 			//make sure there are no duplicates
 		while(wordArray.length < wordsNeeded){
 
 			do{
-				var rando = Math.floor(Math.random()*(wordArray.length));
-				wordArray[rando] 
-			}while(nounRandArray.indexOf(nounRand) !== -1)
+				rando = Math.floor(Math.random()*(wordArray.length));
+			}while(randoArray.indexOf(rando) !== -1)
 
-			nounRandArray.push(nounRand);
-			console.log("nounRandArray",nounRandArray);
-			inputArray.push(noun[nounRand]);
+			randoArray.push(rando);
+
+			console.log("rando",rando);
+			finalArray[i]=wordArray[rando];
+			
+			console.log("finalArrays",finalArray);
+			return finalArray;
 		}
 
   	}
