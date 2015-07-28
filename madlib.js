@@ -2,17 +2,17 @@
   var app = angular.module('madlib', []);
 
   app.controller('MainController', function() {
-  	var self = this;
-  	self.finalWords = {};
-  	self.options = {
-  		nouns: '',
-  		verbs: '',
-  		verbings: '',
-  		adverbs: '',
-  		adjectives: ''
-  	};
-  	self.selectStory = {};
-  	self.asdf = "hello";
+	var self = this;
+	self.finalWords = {};
+	self.options = {
+		nouns: '',
+		verbs: '',
+		verbings: '',
+		adverbs: '',
+		adjectives: ''
+	};
+	self.selectStory = {};
+	self.asdf = "hello";
 
   	//object of each story's needed words, then assign to finalWords object
   	self.preStory = {
@@ -41,14 +41,21 @@
 
 
   			self.finalWords[prop] = {
-  				words: self.options[prop].split('[^,\s][^\,]*[^,\s]*'),
+  				words: self.options[prop].split(', '),
   				numNeeded: self.selectStory[prop]
   			};
 
-  			// //trim the whitespace
-	  		// for(var i =0; i < self.finalWords[prop].words.length; i++){
-	  		// 	self.finalWords[prop].words[i] = self.finalWords[prop].words[i].trim();
-	  		// }
+  			//trim the whitespace
+	  		for(var i =0; i < self.finalWords[prop].words.length; i++){
+	  			self.finalWords[prop].words[i] = self.finalWords[prop].words[i].trim();
+	  		}
+
+	  		//Get rid of emptiness
+	  		for(var i =0; i < self.finalWords[prop].words.length; i++){
+	  			if(self.finalWords[prop].words[i] === ''){
+	  				self.finalWords[prop].words.splice(i,1);
+	  			}
+  			}
 
   			console.log('beforeFill:',self.finalWords);
   			self.finalWords[prop].words = defaultFill(prop, self.finalWords[prop].words, self.finalWords[prop].numNeeded);
