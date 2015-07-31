@@ -23,14 +23,15 @@
 			Magical Ninja Story
 			<input ng-model="main.selectStory" ng-value="main.preStory.ninja" type="radio" name="story"><br><br>
 			<p>{{main.selectStory}}</p>
-			<button class="btn btn-warning" ng-click="main.yomama()" name="create">create</button>
+			<button class="btn btn-warning" ng-click="main.createStory()" name="create">create</button>
 	</div><br>
 
-	<div id="out">
-		<story story="{{main.postStory.bobby}}"></story>
+	<div ng-show="main.postStory" id="out">
+		<story story="main.postStory[main.selectStory.name]"></story>
 	</div>
-	<!-- <story verbs="story.verbs"></story> -->
+
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 	<script src="scripts/madlib.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 </body>
 </html>

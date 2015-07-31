@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('madlib', []);
+  var app = angular.module('madlib', ['ngSanitize']);
 
   app.controller('MainController', function() {
 	var self = this;
@@ -17,16 +17,16 @@
   	//object of each story's needed words, then assign to finalWords object
 	 self.preStory = {
 	  	bobby: {
-	  		wordsNeeded: {nouns: 3, verbs: 4, verbings: 2, adverbs: 5, adjectives: 3},
-	  		title: "Bobby's Story"
+	  		wordsNeeded: {nouns: 3, verbs: 2, verbings: 1, adverbs: 2, adjectives: 2},
+	  		name: "bobby"
 	  	},
 	  	techdeck: {
-	  		wordsNeeded: {nouns: 3, verbs: 4, verbings: 2, adverbs: 5, adjectives: 3},
-	  		title: "Techdeck Story"
+	  		wordsNeeded: {nouns: 3, verbs: 3, verbings: 0, adverbs: 1, adjectives: 3},
+	  		name: "techdeck"
 	  	},
 	  	ninja: {
-	  		wordsNeeded: {nouns: 3, verbs: 4, verbings: 2, adverbs: 5, adjectives: 3},
-	  		title: "Magical Ninja Story"
+	  		wordsNeeded: {nouns: 3, verbs: 4, verbings: 1, adverbs: 2, adjectives: 4},
+	  		name: "ninja"
 	  	}
   	};
 
@@ -38,7 +38,7 @@
   		adjectives: ["stanky", "crazy", "sick", "cool", "ugly"]
   	};
 
-  	self.yomama = function(){
+  	self.createStory = function(){
   		console.log('hello world!');
   		setFinalArray();
 
@@ -50,11 +50,11 @@
 		  	},
 		  	techdeck: {
 		  		title: "Techdeck Story",
-		  		text: ""
+		  		text: "Teckdecks are <span class='underline'>" + self.finalWords.adjectives.words[0] + "</span>. Everyone in the whole <span class='underline'>" + self.finalWords.adjectives.words[1] + "</span> world should <span class='underline'>" + self.finalWords.verbs.words[0] + "</span> one. Techdecks can <span class='underline'>" + self.finalWords.verbs.words[1] + "</span> over <span class='underline'>" + self.finalWords.nouns.words[0] + "</span>s. Their wheels <span class='underline'>" + self.finalWords.adverbs.words[0] + "</span> <span class='underline'>" + self.finalWords.verbs.words[2] + "</span> when you do a trick right. Sometimes it's fun to try finding new <span class='underline'>" + self.finalWords.adjectives.words[2] + "</span> places to skate on, like <span class='underline'>" + self.finalWords.nouns.words[1] + "</span>s and <span class='underline'>" + self.finalWords.nouns.words[2] + "</span>s. The end."
 		  	},
 		  	ninja: {
 		  		title: "Magical Ninja Story",
-		  		text: ""
+		  		text: "Once upon a <span class='underline'>" + self.finalWords.adjectives.words[0] + "</span> time, there lived a magical ninja who came from the <span class='underline'>" + self.finalWords.adjectives.words[1] + "</span> land of <span class='underline'>" + self.finalWords.nouns.words[0] + "</span>s. He liked to <span class='underline'>" + self.finalWords.verbs.words[0] + "</span> <span class='underline'>" + self.finalWords.adverbs.words[0] + "</span>, and it just so happened that the King of the land was announcing a <span class='underline'>" + self.finalWords.verbings.words[0] + "</span> competition, which he thought was similar enough. And so, the ninja went to <span class='underline'>" + self.finalWords.nouns.words[1] + "</span> and asked if he could <span class='underline'>" + self.finalWords.verbs.words[1] + "</span> the competition. \"Sorry,\" said the <span class='underline'>" + self.finalWords.adjectives.words[2] + "</span> manager in charge, \"you have to be able to <span class='underline'>" + self.finalWords.adverbs.words[1] + "</span> <span class='underline'>" + self.finalWords.verbs.words[2] + "</span> at least three miles in order to sign up\". The ninja thought that was a dumb prerequisite, so he didn't sign up, but instead began to <span class='underline'>" + self.finalWords.verbs.words[3] + "</span> <span class='underline'>" + self.finalWords.adjectives.words[3] + "</span> <span class='underline'>" + self.finalWords.nouns.words[2] + "</span>s. The end."
 		  	}
 	  	};
   	};
@@ -67,7 +67,7 @@
   			//split sting into array
   			self.finalWords[prop] = {
   				words: self.options[prop].split(','),
-  				numNeeded: self.selectStory[prop]
+  				numNeeded: self.selectStory.wordsNeeded[prop]
   			};
 
   			//trim the whitespace
@@ -85,11 +85,11 @@
 
   			//fill the emplty spots of the array with random default values
   			self.finalWords[prop].words = defaultFill(prop, self.finalWords[prop].words, self.finalWords[prop].numNeeded);
-  			console.log('afterFill:',self.finalWords);
+  			console.log('afterFill:',angular.copy(self.finalWords));
   			//scramble the array
   			self.finalWords[prop].words = randomize(self.finalWords[prop].words);
   		}
-  		console.log('afterRando:',self.finalWords);
+  		console.log('afterRando:',angular.copy(self.finalWords));
   		//Output final Array
   	}
 
@@ -133,18 +133,6 @@
 		// /////////////////
 
 
-		// 	var story = "One <span class='underline'>" + finalAdjectives[0] + "</span> day, Bobby was <span class='underline'>" + finalVerbings[0] + "</span> around the <span class='underline'>" + finalNouns[0] + "</span>, when <span class='underline'>" + finalAdverbs[0] + "</span>, Bobby saw his aquaintence, <span class='underline'>" + finalNouns[1] + "</span>. \"Hey,\" said Bobby, \"Wanna <span class='underline'>" + finalVerbs[0] + "</span> out of here and <span class='underline'>" + finalVerbs[1] + "</span> that <span class='underline'>" + finalNouns[2] + "</span> over there?\" The two friends <span class='underline'>" + finalAdverbs[1] + "</span> became <span class='underline'>" + finalAdjectives[1] + "</span> friends. The end.";
-		// 	this.story = {title: 'Bobby\'s Story', description: story};
-
-
-
-		//  var story = "Teckdecks are <span class='underline'>" + finalAdjectives[0] + "</span>. Everyone in the whole <span class='underline'>" + finalAdjectives[1] + "</span> world should <span class='underline'>" + finalVerbs[0] + "</span> one. Techdecks can <span class='underline'>" + finalVerbs[1] + "</span> over <span class='underline'>" + finalNouns[0] + "</span>s. Their wheels <span class='underline'>" + finalAdverbs[0] + "</span> <span class='underline'>" + finalVerbs[2] + "</span> when you do a trick right. Sometimes it's fun to try finding new <span class='underline'>" + finalAdjectives[2] + "</span> places to skate on, like <span class='underline'>" + finalNouns[1] + "</span>s and <span class='underline'>" + finalNouns[2] + "</span>s. The end.";
-		// 	this.story = {title: 'Techdeck Story', description: story};
-
-
-		//  var story = "Once upon a <span class='underline'>" + finalAdjectives[0] + "</span> time, there lived a magical ninja who came from the <span class='underline'>" + finalAdjectives[1] + "</span> land of <span class='underline'>" + finalNouns[0] + "</span>s. He liked to <span class='underline'>" + finalVerbs[0] + "</span> <span class='underline'>" + finalAdverbs[0] + "</span>, and it just so happened that the King of the land was announcing a <span class='underline'>" + finalVerbings[0] + "</span> competition, which he thought was similar enough. And so, the ninja went to <span class='underline'>" + finalNouns[1] + "</span> and asked if he could <span class='underline'>" + finalVerbs[1] + "</span> the competition. \"Sorry,\" said the <span class='underline'>" + finalAdjectives[2] + "</span> manager in charge, \"you have to be able to <span class='underline'>" + finalAdverbs[1] + "</span> <span class='underline'>" + finalVerbs[2] + "</span> at least three miles in order to sign up\". The ninja thought that was a dumb prerequisite, so he didn't sign up, but instead began to <span class='underline'>" + finalVerbs[3] + "</span> <span class='underline'>" + finalAdjectives[3] + "</span> <span class='underline'>" + finalNouns[2] + "</span>s. The end.";
-		// 	this.story = {title: 'Magical Ninja Story', description: story};
-
 		// 	this.story = {title: 'Hey player, choose a story first', description: '-_-'};
 
 
@@ -155,7 +143,7 @@
       restrict: 'E',
       templateUrl: "templates/story.html",
       scope: {
-      	story: '@'
+      	story: '='
       },
       controller: function(){
       	var story = this;
