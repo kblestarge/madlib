@@ -11,7 +11,10 @@
 		adverbs: '',
 		adjectives: ''
 	};
-	self.selectStory = {};
+	self.selectStory = {
+  		name: "none"
+  	};
+
 	self.asdf = "hello";
 
   	//object of each story's needed words, then assign to finalWords object
@@ -39,7 +42,17 @@
   	};
 
   	self.createStory = function(){
-  		console.log('hello world!');
+
+  		if(self.selectStory.name == 'none'){
+  			self.postStory = {
+	  			none: {
+			  		title: "-_-",
+			  		text: "Hey player, choose a story first!"
+			  	}
+			};
+			return;
+		}
+
   		setFinalArray();
 
   		//last step
@@ -85,12 +98,10 @@
 
   			//fill the emplty spots of the array with random default values
   			self.finalWords[prop].words = defaultFill(prop, self.finalWords[prop].words, self.finalWords[prop].numNeeded);
-  			console.log('afterFill:',angular.copy(self.finalWords));
+  			
   			//scramble the array
   			self.finalWords[prop].words = randomize(self.finalWords[prop].words);
   		}
-  		console.log('afterRando:',angular.copy(self.finalWords));
-  		//Output final Array
   	}
 
   	function defaultFill(wordType, wordArray, wordsNeeded){
@@ -147,7 +158,6 @@
       },
       controller: function(){
       	var story = this;
-      	console.log("I'm here!");
       },
       controllerAs: 'story',
       bindToController: true

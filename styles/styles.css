@@ -4,8 +4,15 @@
 }
 
 h1{
-	color: white;
-	text-align: center;
+    font-size: 44px !important;
+    background-color: #336688;
+    width: 500px;
+    margin: 0 auto !important;
+    border-radius: 5px;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    text-align: center;
+    box-shadow: 5px 5px 2.5px #888888;
 }
 
 h2.title{
@@ -14,11 +21,14 @@ h2.title{
 }
 
 input[type="text"]{
-	width: 350px;
-	margin: 2px;
-	color: #336688;
-	border: solid;
-	border-radius: 5px;
+    width: 422px;
+    height: 40px;
+    margin: 2px;
+    padding-left: 10px;
+    color: #336688;
+    border: solid;
+    border-radius: 5px;
+    font-size: 19px;
 }
 
 #in{
